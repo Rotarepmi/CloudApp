@@ -5,7 +5,8 @@
 }
 
 .user-modal {
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+          box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
   border-radius: 10px;
 }
 
@@ -15,9 +16,14 @@
 
 .files-wrapp {
   padding-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   position: relative;
 }
 
@@ -32,19 +38,37 @@
   width: 80px;
   height: 100px;
   margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .files-wrapp .file .file-link {
   text-decoration: none;
   color: #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .files-wrapp .file .file-link:hover {
@@ -64,9 +88,14 @@
 
 .files-wrapp .file .file-buttons {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .files-wrapp .file .file-buttons .file-btn {
@@ -75,9 +104,15 @@
   outline: none;
   width: 20px;
   height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   text-decoration: none;
 }
 

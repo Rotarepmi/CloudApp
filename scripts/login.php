@@ -44,21 +44,30 @@
             // fetch mysql table
             $row = $result->fetch_assoc();
 
+            // save username in session variable
             $_SESSION['user'] = $row['user'];
 
+            // tell all users bad logs (bad log type in the db = 0)
             if($logs = $connection->query("SELECT * FROM logs WHERE user = '".$_SESSION["user"]."' AND type = '0'")){
               $bad_logs = $logs->num_rows;
+              // if user tried 3 times to log in with no success - give no permition to log in
               if($bad_logs >2){
                 $_SESSION['e_loginerr'] = 'Zbyt duża liczba błędnych logowań';
                 header('Location: ../index.php');
               }
               else{
+                // find the date of last login attemption
                 $bad_log_table = $connection->query("SELECT * FROM logs WHERE date IN (SELECT MAX(date) FROM logs WHERE user = '".$_SESSION["user"]."' AND type = '0')");
+                // fetch the row
                 $bad_log_row = $bad_log_table->fetch_assoc();
+                // set the last bad login attemption time as session variable
                 $_SESSION['bad_log_time'] = $bad_log_row['date'];
 
+                // try whether password is correct
                 if($password == $row['pass']){
+                  // delete users logs (they are no longer needed)
                   if($connection->query("DELETE FROM logs WHERE user = '".$_SESSION["user"]."'")){
+                    // login attemption ended succesfully - insert log with username, type = 1 (login success), current date
                     if($connection->query("INSERT INTO logs VALUES (NULL, '".$_SESSION["user"]."', '1', now())")){
                       $_SESSION['logged'] = true;
                       // set cookie for logining page
@@ -85,6 +94,7 @@
                   }
                 }
                 else{
+                  // if login was incorrect - insert record with username, type = 0 (login failed), and current date
                   if($connection->query("INSERT INTO logs VALUES (NULL, '".$_SESSION["user"]."', 0, now())")){
                     // if password doesnt match
                     $_SESSION['e_loginerr'] = 'Nieprawidłowy login lub hasło';

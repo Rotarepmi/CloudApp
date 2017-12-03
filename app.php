@@ -32,6 +32,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
+          <!-- Show username stored in cookie -->
           <li class="navbar-text">
             - Zalogowano jako <b><?php echo $_COOKIE['login'] ?></b> -
           </li>
@@ -56,6 +57,7 @@
     <div class="row">
       <div class="col">
         <?php
+        // messages from the server - stored in session variables
           if(isset($_SESSION['bad_log_time'])){
             echo '<div class="alert alert-danger mt-2 mx-auto">'.$_SESSION['bad_log_time'].' zanotowano błędne logowanie!</div>';
             unset($_SESSION['bad_log_time']);
@@ -76,6 +78,8 @@
       <div class="col">
         <div class="files-wrapp">
           <?php
+          // build breadcrumbs - if dir isnt direction - rewrite dir with variable from GET request
+          // (GET sent on folder icon click)
             if(!isset($_GET['dir'])){
               $_SESSION['dir'] = './storage/'.$_SESSION['user'];
 
@@ -100,6 +104,7 @@
               if($dh = opendir($dir)){
                 while(($file = readdir($dh)) && $file !== '.' && $file !== '..'){
 
+                  // test if dir is file or folder
                   if(is_file($dir.'/'.$file)){
                     echo "
                     <div class='file'>
@@ -110,7 +115,7 @@
                         </p>
                       </a>
                       <div class='file-buttons'>
-
+                      
                         <button type='button' class='file-btn download-btn' data-file='$dir/$file' data-toggle='modal' data-target='#downloadModal'>
                           <i class='fa fa-download' aria-hidden='true'></i>
                         </a>

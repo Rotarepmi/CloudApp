@@ -66,6 +66,7 @@
         if($success){
           // Add user to db
           if($connection->query("INSERT INTO users_test VALUES (NULL, '$login', '$pass1')")){
+            // make new direction (new folder) with users name as foldername
             mkdir('../storage/'.$login, 0777, true);
             $_SESSION['register_success'] = true;
             $_SESSION['success_msg'] = "Rejestracja udana - możesz się zalogować";
